@@ -1,0 +1,286 @@
+// =====================================================
+// 🚀 DOM MASTER CHEAT SHEET (ZERO → ADVANCED)
+// =====================================================
+
+
+// =====================================================
+// 🧠 1. DOM BASICS
+// =====================================================
+
+// DOM = Document Object Model
+// HTML ko tree structure me represent karta hai
+
+// Example Tree:
+// document
+//   └── html
+//        └── body
+//             └── div.parent
+//                   ├── div.day
+//                   ├── div.day
+//                   └── ...    
+
+// Har cheez = NODE
+
+
+// =====================================================
+// 📌 2. NODE TYPES
+// =====================================================
+
+// 1. Document Node → document
+// 2. Element Node → <div>
+// 3. Text Node → "Monday"
+// 4. Comment Node → <!-- comment -->
+
+// nodeType values:
+// 1 = element
+// 3 = text
+// 8 = comment
+
+
+// =====================================================
+// 🔍 3. SELECTING ELEMENTS (VERY IMPORTANT)
+// =====================================================
+
+// getElementById → fastest
+const el1 = document.getElementById('id');
+
+// getElementsByClassName → HTMLCollection
+const el2 = document.getElementsByClassName('class');
+
+// getElementsByTagName
+const el3 = document.getElementsByTagName('div');
+
+// querySelector → first match (MOST USED)
+const el4 = document.querySelector('.class');
+
+// querySelectorAll → NodeList
+const el5 = document.querySelectorAll('.class');
+
+
+// =====================================================
+// ⚠️ 4. HTMLCollection vs NodeList
+// =====================================================
+
+// HTMLCollection:
+// - live (auto update)
+// - no forEach ❌
+
+// NodeList:
+// - static (mostly)
+// - forEach works ✅
+
+
+// =====================================================
+// 🌳 5. TRAVERSAL (INTERVIEW FAVORITE)
+// =====================================================
+
+const parent = document.querySelector('.parent');
+
+// children → only elements ✅
+parent.children;
+
+// childNodes → ALL nodes ❌ (text + comment bhi)
+parent.childNodes;
+
+// firstChild → text bhi ho sakta hai ❌
+parent.firstChild;
+
+// firstElementChild → always element ✅
+parent.firstElementChild;
+
+// lastElementChild
+parent.lastElementChild;
+
+
+// =====================================================
+// 🔄 6. SIBLINGS
+// =====================================================
+
+// nextSibling → text aa sakta hai ❌
+el.nextSibling;
+
+// nextElementSibling → element only ✅
+el.nextElementSibling;
+
+// previousSibling / previousElementSibling
+
+
+// =====================================================
+// 🔁 7. LOOPING
+// =====================================================
+
+// NodeList:
+document.querySelectorAll('.day').forEach(el => {
+    console.log(el.innerText);
+});
+
+// HTMLCollection → convert:
+Array.from(document.getElementsByClassName('day'))
+    .forEach(el => console.log(el));
+
+
+// =====================================================
+// ✏️ 8. CONTENT MANIPULATION
+// =====================================================
+
+const el = document.querySelector('.day');
+
+// innerText → visible text
+el.innerText;
+
+// textContent → hidden bhi include
+el.textContent;
+
+// innerHTML → HTML ke saath
+el.innerHTML;
+
+
+// =====================================================
+// 🏷️ 9. ATTRIBUTES
+// =====================================================
+
+// get
+el.getAttribute('class');
+
+// set
+el.setAttribute('id', 'newId');
+
+// remove
+el.removeAttribute('id');
+
+
+// =====================================================
+// 🎨 10. STYLING
+// =====================================================
+
+// inline style
+el.style.color = "red";
+el.style.backgroundColor = "black";
+
+// class add/remove
+el.classList.add('active');
+el.classList.remove('active');
+el.classList.toggle('active');
+
+
+// =====================================================
+// ➕ 11. CREATE ELEMENT (IMPORTANT)
+// =====================================================
+
+const div = document.createElement('div');
+div.className = "new";
+div.id = "myId";
+div.innerText = "Hello Bhai";
+
+// append
+document.body.appendChild(div);
+
+
+// =====================================================
+// 🔀 12. INSERT METHODS (ADVANCED)
+// =====================================================
+
+// append → end me
+parent.append(div);
+
+// prepend → start me
+parent.prepend(div);
+
+// before
+el.before(div);
+
+// after
+el.after(div);
+
+
+// =====================================================
+// ❌ 13. REMOVE ELEMENT
+// =====================================================
+
+el.remove();
+
+
+// =====================================================
+// ⚡ 14. EVENTS (CORE JS)
+// =====================================================
+
+// click event
+el.addEventListener('click', function () {
+    console.log("Clicked!");
+});
+
+// event object
+el.addEventListener('click', (e) => {
+    console.log(e.target);
+});
+
+
+// =====================================================
+// 🔥 15. EVENT BUBBLING & CAPTURING
+// =====================================================
+
+// bubbling (default)
+// child → parent
+
+// stop bubbling
+el.addEventListener('click', (e) => {
+    e.stopPropagation();
+});
+
+
+// =====================================================
+// 🚀 16. EVENT DELEGATION (ADVANCED)
+// =====================================================
+
+// parent pe event lagao
+document.querySelector('.parent')
+.addEventListener('click', (e) => {
+    if (e.target.classList.contains('day')) {
+        console.log("Day clicked:", e.target.innerText);
+    }
+});
+
+
+// =====================================================
+// 💣 17. PERFORMANCE TIPS
+// =====================================================
+
+// ❌ avoid multiple DOM updates
+// ✅ use fragment
+
+const fragment = document.createDocumentFragment();
+
+for (let i = 0; i < 5; i++) {
+    const div = document.createElement('div');
+    div.innerText = i;
+    fragment.appendChild(div);
+}
+
+document.body.appendChild(fragment);
+
+
+// =====================================================
+// 🧪 18. DEBUGGING
+// =====================================================
+
+// console.log(element)
+// console.dir(element) → full object view
+
+// check node type
+console.log(el.nodeType);
+
+
+// =====================================================
+// 🏆 FINAL GOLDEN RULES
+// =====================================================
+
+// 1. children > childNodes (99% cases)
+// 2. querySelector is king 👑
+// 3. event delegation = pro level
+// 4. avoid unnecessary DOM access
+// 5. DOM = tree → always think hierarchy
+
+
+// =====================================================
+// 😎 DONE → TU AB DOM KA BAAP LEVEL PE HAI
+// =====================================================

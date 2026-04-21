@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang= "en">
+    <head>
+        <meta charset="UTF-8">
+        
+        <title>DOM learning</title>
+        <style>
+            .bg-black{
+                background-color: #212121;
+                color:#fff
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="bg-black">
+            <h1 id="title" class="heading">Dom learning on Chai aur Code
+                <span style="display:none"> test text</span>
+            </h1>
+            <h2>Lorem ipsum dolor sit </h2>
+            <h2>lorem ipsum dolor sit</h2>
+            <h2>lorem ipsum dolor sit</h2>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <input type="password" name="" id="">
+            <ul>
+                <li class="list-item">one</li>
+                <li class="list-item">two</li>
+                <li class="list-item">three</li>
+                <li class="list-item">four</li>
+            </ul>
+        </div>
+    </body>
+
+
+    <script>
+        //document.getElementById('title')
+        title.style.backgroundColor='green'
+        title.style.padding="15px"
+        title.style.borderRadius="15px"
+        
+    </script>
+</html> 22
+
+<!-- /*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 DOM BASICS
+DOM = Document Object Model
+HTML elements ko JavaScript se access aur manipulate karne ka tarika.
+
+Example:
+document.getElementById('title')
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+
+/*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 Changing CSS using JS
+
+title.style.backgroundColor = "green"
+title.style.padding = "15px"
+title.style.borderRadius = "15px"
+
+👉 .style property se element ki CSS change kar sakte hain
+👉 CSS properties camelCase me likhte hain
+   background-color → backgroundColor
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+
+/*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 innerText vs textContent vs innerHTML
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1️⃣ innerText
+✔ Sirf visible text return karta hai
+✔ Hidden text ignore karta hai
+
+title.innerText
+→ "Dom learning on Chai aur Code"
+
+
+2️⃣ textContent
+✔ Saara text return karta hai
+✔ Hidden text bhi include karta hai
+
+title.textContent
+→ visible + hidden text
+
+
+3️⃣ innerHTML
+✔ Pure HTML content return karta hai
+✔ HTML tags bhi include karta hai
+
+title.innerHTML
+→ text + HTML tags
+
+Example:
+<span style="display:none">test text</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+
+/*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚡ Quick Rule
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+innerText   → visible text only
+textContent → all text (hidden bhi)
+innerHTML   → HTML + text
+
+👉 HTML insert karna ho → innerHTML
+👉 sirf text chahiye → innerText / textContent
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/ -->
+
+<!-- /*
+
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+             📌 DOM NOTES (querySelector)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔍 SELECTING ELEMENTS
+
+document.querySelector('ul')
+→ first <ul> element
+
+document.querySelector('#title')
+→ element by id
+
+document.querySelector('.heading')
+→ element by class
+
+document.querySelector('input[type="password"]')
+→ attribute selector
+
+❌ document.querySelector('ui')
+→ null (invalid tag)
+
+---------------------------------------------------
+
+📦 STORING ELEMENT
+
+const myul = document.querySelector('ul')
+
+✔ reuse easy
+✔ clean code
+
+---------------------------------------------------
+
+🔎 NESTED SELECTION
+
+myul.querySelector('li')
+→ first <li> inside <ul>
+
+👉 parent → child selection possible
+
+---------------------------------------------------
+
+🎨 STYLE MANIPULATION
+
+const item = myul.querySelector('li')
+
+item.style.backgroundColor = "green"
+item.style.padding = "10px"
+
+👉 CSS via JS (camelCase)
+
+---------------------------------------------------
+
+✏️ TEXT MANIPULATION
+
+item.innerText
+→ visible text
+
+item.innerText = "five"
+→ text update
+
+---------------------------------------------------
+
+⚠️ CASE SENSITIVE
+
+item.innertext ❌
+item.innerText ✔
+
+👉 JS properties are case-sensitive
+
+---------------------------------------------------
+
+🧠 CORE FLOW
+
+SELECT  →  STORE  →  MANIPULATE
+
+ul      →  li     →  style/text
+
+---------------------------------------------------
+
+⚡ QUICK CHEAT
+
+'#id'        → id
+'.class'     → class
+'tag'        → tag
+'tag[attr]'  → attribute
+
+querySelector() → first match only
+
+--------------------------------------------------- -->
+
+
+
+
+<!-- /*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            📌 DOM NOTES (querySelectorAll)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔍 SELECTING MULTIPLE ELEMENTS
+
+const tempLiList = document.querySelectorAll('li')
+
+→ NodeList(3) [li, li, li]
+
+✔ multiple elements return karta hai
+✔ array jaisa lagta hai (but array nahi hota)
+
+---------------------------------------------------
+
+⚠️ COMMON MISTAKE
+
+tempLiList.style.color = "green" ❌
+
+👉 Error:
+Cannot set properties of undefined
+
+Reason:
+NodeList pe direct style apply nahi hota
+
+---------------------------------------------------
+
+✅ CORRECT WAY
+
+tempLiList[0].style.color = "green"
+
+👉 individual element access karo using index
+
+---------------------------------------------------
+
+🔁 LOOP (BEST PRACTICE)
+
+tempLiList.forEach((li) => {
+    li.style.color = "green"
+})
+
+✔ sab elements pe apply hoga
+
+---------------------------------------------------
+
+⚠️ CASE SENSITIVE ERROR
+
+Document.querySelectorAll('h1') ❌
+
+👉 Error:
+Document is not defined
+
+✔ Correct:
+document.querySelectorAll('h1')
+
+---------------------------------------------------
+
+⚠️ STRING SYNTAX ERROR
+
+myh1[0].style.color = "red' ❌
+
+👉 Error:
+Invalid or unexpected token
+
+✔ Correct:
+myh1[0].style.color = "red"
+
+✔ Always same quotes use karo (" " ya ' ')
+
+---------------------------------------------------
+
+📦 FINAL WORKING CODE
+
+const myh1 = document.querySelectorAll('h1')
+
+myh1[0].style.color = "white"
+
+---------------------------------------------------
+
+🧠 CORE UNDERSTANDING
+
+querySelector()     → single element
+querySelectorAll()  → NodeList (multiple elements)
+
+👉 NodeList ≠ Array (but loop kar sakte ho)
+
+--------------------------------------------------- -->
+
+
+<!-- /*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     📌 HTMLCollection vs NodeList (FULL NOTES)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔍 SELECTING BY CLASS
+
+document.getElementsByClassName('list-item')
+→ HTMLCollection(4) [li, li, li, li]
+
+const tempClassList = document.getElementsByClassName('list-item')
+
+---------------------------------------------------
+
+⚠️ HTMLCollection ISSUE
+
+tempClassList.forEach(...) ❌
+
+👉 Error: forEach is not a function
+
+Reason:
+HTMLCollection me forEach nahi hota
+
+---------------------------------------------------
+
+✅ SOLUTION (Convert to Array)
+
+const myConvertedArray = Array.from(tempClassList)
+
+✔ ab ye pure array ban gaya
+
+---------------------------------------------------
+
+🔁 LOOP AFTER CONVERSION
+
+myConvertedArray.forEach((li) => {
+    li.style.color = "green"
+})
+
+✔ ab sab elements pe style apply hoga
+
+---------------------------------------------------
+
+⚠️ COMMON ERROR
+
+conat myConvertedArray = Array.from(tempClassList) ❌
+
+👉 typo: "conat"
+
+✔ Correct:
+const myConvertedArray = Array.from(tempClassList)
+
+---------------------------------------------------
+
+📊 DIFFERENCE (IMPORTANT 🔥)
+
+HTMLCollection:
+✔ getElementsByClassName
+✔ live collection (auto update hota hai)
+❌ forEach nahi hota
+
+NodeList:
+✔ querySelectorAll
+✔ static collection
+✔ forEach available
+
+---------------------------------------------------
+
+🧠 QUICK CHEAT
+
+HTMLCollection → convert to array → then loop  
+NodeList       → direct forEach use kar sakte ho  
+
+---------------------------------------------------
+
+⚡ ONE LINE RULE
+
+"HTMLCollection ko Array me convert karo,
+NodeList ko direct use karo"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/ -->
+

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DOM | Code with Chai</title>
+</head>
+<body style="background-color: black;
+             color:white;">
+
+    <div class="parent">
+        <!-- this is a comment-->
+        <div class="day">Monday</div>
+        <div class="day">Tuesday</div>
+        <div class="day">Wednesday</div>
+        <div class="day">Thursday</div>
+    </div>
+</body>
+
+<script>
+    const parent=document.querySelector('.parent')
+
+    // console.log(parent)
+    // console.log(parent.children)
+    // console.log(parent.children[1].innerHTML)
+
+
+    // for(let i=0;i<parent.children.length;i++){
+    //     console.log(parent.children[i].innerText)
+    // }    ---- ye to monday tuesday wednesday thursday print krega
+
+    parent.children[1].style.color="orange"
+    //console.log(parent.firstElementChild);
+    // console.log(parent.lastElementChild);
+
+
+   const dayone= document.querySelector('.day')
+
+//    console.log(dayone)  //monday ko print krega kyuki pehla hi count krega
+
+//    console.log(dayone.parentElement)   //isme parent pura div 
+   
+
+//    console.log(dayone.nextElementSibling); //monday ka next hoga tuesday
+
+
+    console.log("NODES: ",parent.childNodes)
+
+
+
+
+
+
+</script>
+</html>
+
+
+
+
+
+<!-- const parent = document.querySelector('.parent');
+
+// NODES:
+// parent.childNodes ek NodeList return karta hai
+// isme sirf elements hi nahi, balki:
+// 1. Text nodes (spaces, line breaks)
+// 2. Element nodes (div, span, etc.)
+// 3. Comment nodes 
+ // sab include hote hain
+
+// DOM ek tree structure follow karta hai
+// har node ke andar aur nodes ho sakte hain (nested structure)
+
+// HTML me jo spaces / enter hote hain
+// wo bhi #text node ke form me count hote hain
+
+// isliye output thoda messy dikhta hai:
+// [#text, div, #text, div, #text, div...]
+
+// agar sirf elements chahiye ho to:
+parent.children  // ye sirf element nodes deta hai
+
+console.log("NODES:", parent.childNodes) --> 

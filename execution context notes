@@ -1,0 +1,124 @@
+🚀 JavaScript Execution Context (Full Flow Notes)
+🧠 JavaScript Basics
+⚙️ Synchronous
+→ Executes one line at a time
+🧵 Single-threaded
+→ Only one call stack
+
+👉 Default behavior = Blocking execution
+👉 Each operation waits for previous one ⏳
+
+📦 Core Components
+1. 🗂️ Call Stack
+Stores execution contexts
+Works on LIFO (Last In First Out) 🔁
+2. 🧠 Memory Heap
+Stores variables & objects
+⚡ Execution Context
+
+👉 Environment where JS code runs
+
+Types:
+🌍 Global Execution Context (GEC)
+🧩 Function Execution Context (FEC)
+🧪 Eval Execution Context (rare)
+🔁 How Code Executes (VERY IMPORTANT FLOW)
+
+Each execution context runs in 2 phases:
+
+🟡 1. Memory Creation Phase (Hoisting Phase)
+
+👉 JS scans code before execution
+
+Variables → undefined
+Functions → full definition stored
+Example:
+let val1 = 10
+let val2 = 5
+
+function addNum(num1, num2){
+    let total = num1 + num2
+    return total
+}
+
+let result1 = addNum(val1, val2)
+let result2 = addNum(10, 2)
+Memory Phase Output:
+val1 → undefined
+val2 → undefined
+addNum → function definition ✅
+result1 → undefined
+result2 → undefined
+🟢 2. Execution Phase
+
+👉 Now actual code runs line by line
+
+val1 = 10
+val2 = 5
+🔥 Function Call Flow (VERY IMPORTANT)
+👉 When addNum(val1, val2) runs:
+Step 1: 🆕 New Execution Context Created
+New Variable Environment (VE)
+New Execution Thread
+Step 2: Memory Phase (inside function)
+num1 → undefined
+num2 → undefined
+total → undefined
+Step 3: Execution Phase
+num1 → 10
+num2 → 5
+total → 15
+
+👉 Returns 15 🔁
+
+Step 4: 🗑️ Context Deleted
+Function EC removed from call stack
+🔁 Same happens for:
+addNum(10, 2)
+
+Result:
+
+total → 12
+📊 Call Stack Visualization
+|-------------------|
+|   addNum()        |  👈 pushed
+|-------------------|
+|   Global EC       |
+|-------------------|
+
+After execution:
+
+|-------------------|
+|   Global EC       |
+|-------------------|
+🧠 Key Concepts
+📌 Hoisting
+Variables → undefined
+Functions → fully available
+📌 Execution Thread + Variable Environment
+
+Every execution context has:
+
+🧠 Memory (Variables)
+🧵 Thread (Execution)
+📌 this keyword
+In Global EC → this = window (browser 🌐)
+⚡ Important Flow Summary (REVISION)
+🌍 Global Execution Context created
+🟡 Memory Phase (hoisting)
+🟢 Execution Phase
+📞 Function call → new Execution Context
+🔁 Repeat memory + execution phases
+🗑️ Context deleted after execution
+📚 Call stack manages everything (LIFO)
+💥 Super Short Summary
+
+👉 JS = Single-threaded + synchronous
+👉 Code runs inside Execution Context
+👉 Each EC has:
+
+Memory Phase 🟡
+Execution Phase 🟢
+
+👉 Function call = New EC 🚀
+👉 Call Stack manages execution 📚

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>htnml Events </title>
+</head>
+
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div>
+        <ul id="images">
+            <li><img width="200px" id="photoshop"
+                    src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt="photoshop"></li>
+            <li><img width="200px" id="japan"
+                    src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="river"
+                    src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="owl"
+                    src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="prayer"
+                    src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+    </div>
+</body>
+<script>
+    // // document.getElementById('owl').onclick=function(){
+    // //     alert("owl clicked")
+    // // }
+
+    // // document.getElementById('owl').addEventListener('click',function(){
+    // //     alert("owl clicked again")
+    // // })
+
+
+    // //attachEvent()==>used in early times when internet explorer is used
+    // //jQuery-on
+    //  //types,timestamps,defaultprevented -> focus
+
+    // //target,toElement,srcElement, currentTarget -> focus
+
+    // //clientX, clientY, screenX, screenY, offset -> focus
+
+    // //altkey, ctrlkey, shiftkey, keyCode-> focus
+
+
+    // //Event Propogation,going inside to outside, outer bubble=images, inner bubble=owl
+    //  document.getElementById('images').addEventListener('click',function(e){
+    //     console.log("clicked inside the images")
+    // },false)  // yaha pe jb images ke andar click krenge to print hoga
+
+    // document.getElementById('owl').addEventListener('click',function(e){
+    //     console.log("clicked the owl") //yaha pe jb owl pe click krenge to pehle owl print hoga phir images wala print hoga
+    //     e.stopPropagation() // ye rok dega bubbling ko upar nhi jaane dega to agar ye likhoge to sirf owl clicked print hoga
+    // },false)
+
+    // /*ab capturing me third parameter dono mein true pass kr denge to pehle 
+    // images hoga phir owl hoga*/
+
+    // document.getElementById('google').addEventListener('click',function(e){
+    //     e.preventDefault()
+    // },false)
+
+
+    /*yaha pr image hatane ke liye uss image ka li udana padega to image ka 
+    parent node li hi hai*/
+    document.querySelector('#images').addEventListener('click', function (e) {
+
+        if (e.target.tagName === 'IMG') {
+            e.target.parentNode.remove(); //clicking on particukarimage will be removing it
+        }
+
+    })  //agar li pe click kr doge to ud jayega pura list hi kyuki li ka parant node to ul hoga 
+
+    //upar event spillover ho raha haai kyuki hme img udana tha pr li dabane pe ul hiud jaa raha aatha to hum bus 
+    //condition laga ke use rok skte hai
+
+
+
+</script>
+
+</html>

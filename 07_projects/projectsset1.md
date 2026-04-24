@@ -186,3 +186,83 @@ function startgame(){
   playgame=true;
 }
 ```
+
+## Project 5 - press key and see magic
+
+``` javascript
+const insert = document.getElementById('insert');
+
+window.addEventListener('keydown', (e) => {
+  insert.innerHTML = `
+    <div class='color'>
+    <table>
+    <tr>
+      <th>Key</th>
+      <th>Keycode</th> 
+      <th>Code</th>
+    </tr>
+    <tr>
+      <td>${e.key === ' ' ? 'Space' : e.key}</td>
+      <td>${e.keyCode}</td> 
+      <td>${e.code}</td>
+    </tr>
+    
+  </table>
+    </div>
+  `;
+});
+```
+
+## Project 6 - Infinite colors
+
+```javascript
+      //generate random hex color code
+
+      function randomcolor(){
+
+      const letters ="0123456789ABCDEF"
+      let color="#";
+
+      for(let i=0;i<6;i++){
+        color+=letters[Math.floor(Math.random()*16)]
+      }
+      return color;
+
+    }
+      
+      function startchangingcolor(){
+        document.body.style.backgroundColor=randomcolor();
+      }
+      
+      const startt=document.querySelector('#start');
+      const stopp=document.querySelector('#stop');
+
+      let interval;
+
+      startt.addEventListener('click',function(){
+        if(!interval)
+          interval=setInterval(startchangingcolor,1000);
+      })
+      stopp.addEventListener('click',function(){
+            clearInterval(interval);
+            interval=null;
+      })
+      /*
+intervalId ko null isliye karte hain:
+clearInterval ke baad bhi variable me purani value (interval ID) rehti hai
+null karne se pata chalta hai ki ab koi interval chal nahi raha (clean state)
+
+if (!intervalId) safety check isliye lagate hain:
+agar user multiple baar Start button click kare to multiple intervals start na ho
+bina check ke har click par naya interval start ho jayega (bug + fast execution)
+
+is check ki wajah se:
+sirf ek hi interval ek time par chalega ✔️
+
+flow:
+Start → agar interval nahi chal raha to start karo
+Stop → interval band karo + intervalId ko null kar do
+*/
+```
+
+

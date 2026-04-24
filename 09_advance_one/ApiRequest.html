@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Card</title>
+</head>
+
+<body style="background-color: #212121; color: white; display:flex; justify-content:center; align-items:center; height:100vh;">
+
+  <div class="card">
+    <img id="profileImg" src="" alt="Profile" style="width:100%; display:none;">
+    
+    <div class="container">
+        <h1 id="name">Loading...</h1>
+        <p id="followers">Followers: --</p>
+        
+        <button id="btn">Get Profile</button>
+    </div>
+  </div>
+
+</body>
+
+<style>
+.card {
+    width: 300px;
+    height: auto;
+    background: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.container {
+    padding: 10px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    background: orange;
+    cursor: pointer;
+    border-radius: 5px;
+}
+</style>
+
+<script>
+const btn = document.getElementById('btn');
+
+btn.addEventListener('click', function () {
+
+    const requestURL = "https://api.github.com/users/rounakk001";
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('GET', requestURL);
+
+    xhr.onreadystatechange = function () {
+
+        if (xhr.readyState === 4) {
+            const data = JSON.parse(xhr.responseText);
+
+            // data ko UI me dalna
+            document.getElementById('profileImg').src = data.avatar_url;
+            document.getElementById('profileImg').style.display = "block";
+
+            document.getElementById('name').innerText = data.name;
+            document.getElementById('followers').innerText = "Followers: " + data.followers;
+        }
+    }
+
+    xhr.send();
+});
+</script>
+
+</html>

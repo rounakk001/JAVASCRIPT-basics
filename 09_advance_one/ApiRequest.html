@@ -14,6 +14,7 @@
     <div class="container">
         <h1 id="name">Loading...</h1>
         <p id="followers">Followers: --</p>
+        <p id="repository">Public repos: --</p>
         
         <button id="btn">Get Profile</button>
     </div>
@@ -57,7 +58,7 @@ btn.addEventListener('click', function () {
     xhr.open('GET', requestURL);
 
     xhr.onreadystatechange = function () {
-
+ 
         if (xhr.readyState === 4) {
             const data = JSON.parse(xhr.responseText);
 
@@ -67,6 +68,7 @@ btn.addEventListener('click', function () {
 
             document.getElementById('name').innerText = data.name;
             document.getElementById('followers').innerText = "Followers: " + data.followers;
+            document.getElementById('repository').innerText= "Public Repos: " + data.public_repos;
         }
     }
 

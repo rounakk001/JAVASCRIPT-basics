@@ -1,0 +1,141 @@
+### Chapter: Deep Dive into JavaScript Prototypes and the `new` Keyword
+
+**Introduction**
+
+- [00:00:00 ~ 00:02:42]  
+This chapter explores the **JavaScript prototype behavior**, a fundamental yet often misunderstood concept critical for understanding how JavaScript works behind the scenes. Unlike typical course material that superficially covers **prototype inheritance**, this content delves into the **mechanism** and **behavior** of prototypes, explaining why they exist and how they function.  
+- The concept is relevant not only for interview preparation but for truly mastering JavaScript's object system, especially for developers with 1-4 years of experience who seek to deepen their understanding beyond surface-level knowledge.  
+- Key terms introduced: **prototype**, **prototype inheritance**, **`new` keyword**, **behavior**, **function as object**.  
+- The significance lies in shifting from memorizing definitions to **comprehending the "why" and "how"** behind JavaScript's prototype-based inheritance.
+
+---
+
+### Section 1: Understanding the Prototype Chain in JavaScript Objects
+
+- [00:02:47 ~ 00:07:57]  
+When creating objects using constructors or literals, each object contains an internal reference to a **prototype object**.  
+  - Example: Creating an array with `new Array()` reveals a hidden **prototype** property pointing to an object that contains default methods like `.map()`, `.slice()`, `.join()`, etc.  
+  - This prototype acts as a **fallback layer** for property lookup: if a property or method is not found on the object itself, JavaScript looks up the **prototype chain** until it finds the property or reaches `null`.  
+- This explains why objects can utilize inherited methods without redeclaring them on every instance.  
+- The prototype chain is essentially a **linked hierarchy** of objects, enabling **inheritance** and **property delegation**.  
+- Direct access to the prototype is possible via the special property `__proto__` (underscored twice on both sides), although it's considered somewhat outdated or "bad syntax." A newer method `Object.setPrototypeOf()` provides a cleaner way to manipulate prototypes.  
+- The prototype chain terminates at an object whose prototype is `null`, indicating no further inheritance.
+
+---
+
+### Section 2: Functions as Objects and Their Prototype Behavior
+
+- [00:08:53 ~ 00:13:18]  
+Functions in JavaScript are **special objects** with callable behavior. This duality means:  
+  - Functions have properties and methods like objects do.  
+  - You can attach properties to functions using dot notation (e.g., `multiplyByFive.power = 2`).  
+- This is a critical insight: **everything in JavaScript is an object**, including functions, arrays, strings, etc.  
+- The speaker demonstrates creating a simple function `multiplyByFive` and shows how it behaves like an object by attaching custom properties.  
+- The prototype chain also applies to functions, meaning functions inherit from `Function.prototype` and ultimately `Object.prototype`.  
+- This understanding is foundational for grasping how constructors and the `new` keyword work.
+
+---
+
+### Section 3: The Role and Mechanics of the `new` Keyword
+
+- [00:21:01 ~ 00:26:57]  
+The **`new` keyword** is pivotal in JavaScript's object creation paradigm. Its behind-the-scenes operation includes:  
+  - Creating a **new empty object**.  
+  - Setting the new object's internal prototype link (`[[Prototype]]`) to the constructor function’s `prototype` property.  
+  - Executing the constructor function with `this` bound to the new object.  
+  - Returning the new object unless the constructor explicitly returns another object.  
+- This process enables the emulation of classical object-oriented programming in JavaScript, which is fundamentally prototype-based.  
+- The speaker emphasizes that classes in JavaScript are syntactic sugar for this prototype-based system, and understanding `new` is essential before moving onto classes.  
+- The prototype linked to the new object is crucial for method sharing and inheritance.  
+- Misusing or forgetting `new` leads to runtime errors or unexpected behavior because the prototype chain and context (`this`) are not set correctly.
+
+---
+
+### Section 4: The `this` Keyword in Function Contexts and Prototype Methods
+
+- [00:13:18 ~ 00:20:55]  
+The **`this` keyword** refers to the current execution context and is intricately tied to how functions are invoked.  
+  - Within constructor functions, `this` refers to the newly created object by `new`.  
+  - Inside prototype methods, `this` accesses the properties of the object invoking the method.  
+- This enables shared methods on prototypes to operate on instance-specific data.  
+- The speaker demonstrates adding methods like `increment()` and `printMe()` to the prototype of a constructor function to manipulate instance properties such as `score`.  
+- The challenge arises when multiple instances share the same prototype method, but each method call should affect the correct instance's data. This is resolved by `this` binding implicitly pointing to the caller object.  
+- This differentiation clarifies how prototype methods serve all instances yet maintain instance-specific behavior.
+
+---
+
+### Section 5: Real-World Example - Creating Users and Shared Methods via Prototypes
+
+- [00:16:13 ~ 00:20:55]  
+A practical example shows defining a constructor function `createUser` that accepts parameters such as username and price.  
+  - Prototype methods like `increment()` increase a user's score dynamically.  
+  - Another method `printMe()` outputs the user’s score.  
+- Both methods are attached to the prototype, meaning they are shared across all user instances.  
+- The example highlights the importance of `this` to ensure methods modify the correct user’s properties.  
+- The speaker further discusses how the `new` keyword facilitates this pattern by linking each instance to its prototype, enabling method sharing without duplication.
+
+---
+
+### Section 6: Extending Built-in Objects and Adding Custom Properties
+
+- [00:27:30 ~ 00:46:38]  
+One advanced concept is extending built-in JavaScript objects (e.g., `String`) by adding custom properties or methods to their prototypes.  
+- The speaker attempts to add a **`trueLength` property** to `String.prototype` that returns the length excluding trailing spaces (a trimmed length).  
+- This involves writing a function on the prototype that processes the string value (`this`) and returns the computed result.  
+- This example illustrates how prototype inheritance can be used to enhance standard objects with user-defined functionality, a common pattern in libraries and frameworks.  
+- Caution is suggested as modifying built-in prototypes affects all instances globally, which can lead to conflicts if not managed carefully.
+
+---
+    
+### Section 7: Prototype Inheritance and Linking Objects
+
+- [00:38:05 ~ 00:43:07]  
+The chapter explains how JavaScript objects can inherit properties and methods from other objects via prototypes.  
+- The speaker creates multiple objects representing roles like `Teacher` and `TeachingSupport` with specific properties and functions.  
+- Using the `__proto__` property or `Object.setPrototypeOf()`, one object’s prototype is set to another, enabling **inheritance** of properties and methods.  
+- This manual prototype linking mimics classical inheritance and supports shared behavior across objects without duplication.  
+- Explanation includes how different objects can share or override properties, illustrating the dynamic and flexible nature of JavaScript's prototype system.  
+- The concept of **prototype property shadowing** and property lookup order is implicitly discussed.
+
+---
+
+### Section 8: Practical Tips and Advanced Insights
+
+- [00:43:07 ~ 00:48:30]  
+- The speaker stresses that **JavaScript classes are syntactic sugar** over prototypes and constructor functions.  
+- Understanding prototypes and the `new` keyword is essential for deep JavaScript mastery, especially for advanced interview scenarios.  
+- The chapter concludes by encouraging developers to experiment with prototypes and `this` context to internalize these concepts.  
+- The speaker hints at future content on classes but emphasizes that the underlying prototype mechanism remains the foundation.  
+- The video content is a rich resource for those aiming to progress from intermediate to advanced JavaScript development by grasping what "happens behind the scenes."
+
+---
+
+### Conclusion: Key Takeaways and Implications
+
+- Prototypes in JavaScript are not just interview buzzwords but are **core to understanding object behavior, inheritance, and method delegation**.  
+- The **prototype chain** enables property lookup beyond the immediate object, creating a flexible inheritance system.  
+- Functions are objects, allowing properties and methods to be attached and inherited, blurring lines between callable entities and data structures.  
+- The **`new` keyword** automates creating objects linked to prototypes, ensuring proper context and inheritance for constructor functions.  
+- **`this` keyword** within functions dynamically points to the calling context, enabling shared methods to operate correctly on instance data.  
+- Extending built-in objects via prototypes is powerful but should be done judiciously to avoid unintended side effects.  
+- Understanding these mechanics empowers developers to write more efficient, reusable, and maintainable JavaScript code and is crucial for facing advanced interview questions confidently.  
+- Ultimately, mastering prototypes and `new` provides insight into JavaScript's unique object-oriented model, differentiating it from classical OOP languages.
+
+---
+
+### Advanced Bullet-Point Summary
+
+- Prototype is an internal object linked to every JavaScript object, enabling inheritance and property delegation.  
+- Property lookup traverses up the prototype chain until the property is found or `null` is reached.  
+- Functions in JavaScript are objects and can have properties/methods attached dynamically.  
+- The `new` keyword creates a new object, sets its prototype, binds `this` in the constructor, and returns the object.  
+- Prototype methods share functionality across instances while maintaining instance-specific data access via `this`.  
+- Modifying built-in prototypes (e.g., `String.prototype`) allows adding custom methods globally.  
+- Prototype inheritance can be manually set using `__proto__` or `Object.setPrototypeOf()`.  
+- Classes in JavaScript are syntactic sugar over prototypes and constructor functions.  
+- Understanding the behind-the-scenes behavior of prototypes and `new` is essential for advanced JavaScript proficiency and interviews.  
+- The speaker’s practical code examples illustrate these concepts concretely, bridging theory and practice.
+
+---
+
+This chapter provides a comprehensive and nuanced understanding of JavaScript prototypes, the `new` keyword, and the related behaviors that define the language’s object model. The insights herein are indispensable for developers aiming to master JavaScript’s unique and powerful inheritance system.

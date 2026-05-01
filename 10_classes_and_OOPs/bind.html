@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+</head>
+<body>
+    <button>Button Clicked</button>
+</body>
+<script>
+    // Ye class ek simple component jaisa behavior dikhati hai.
+    // Yahan bind() ka use isliye kiya gaya hai taake
+    // event handler mein `this` hamare React object ko refer kare.
+    class React{
+        constructor(){
+            this.library="react";
+            this.server="https://localhost:300";
+
+            // requirement: button pe click event lagana hai
+            // is event handler mein this ko current instance banana hai
+            document.querySelector('button')
+            .addEventListener('click',this.handleclick.bind(this)); 
+            // agar bind na lagaye to handleclick ke andar this undefined ho sakta hai
+            // kyunki event listener default context ko window/undefined bana deta hai
+        }
+
+        handleclick(){
+            // bind karne ke baad yahan this React class ka instance hai
+            console.log(`button clicked`);
+
+            // agar bind na hota to this.server ka access nahi milta
+            console.log(`${this.server}`);
+        }
+    }
+
+    // instance create kar rahe hain taake constructor run ho jaye
+    const app=new React();
+</script>

@@ -265,4 +265,84 @@ Stop → interval band karo + intervalId ko null kar do
 */
 ```
 
+## Project 7 - Typing Effect
+``` javascript
+// typed text show karne ke liye span select kiya
+const typedTextSpan = document.querySelector('.typed-text');
+
+// cursor select kiya
+const cursor = document.querySelector('.cursor');
+
+// words ka array
+const words = ['Love', 'Jhakaas', 'mast', 'dhinchak', 'Weird'];
+
+// typing function
+function type() {
+
+    // har word pe loop
+    words.forEach((word, index) => {
+
+        // naye word ke start pe purana text clear
+        setTimeout(() => {
+            typedTextSpan.innerHTML = "";
+        }, index * 3000);
+
+        // word ko letters me tod kar ek-ek letter type karo
+        word.split('').forEach((letter, index1) => {
+
+            setTimeout(() => {
+
+                // letter add hota jayega
+                typedTextSpan.innerHTML += letter;
+
+            }, (index * 3000) + (index1 * 200));
+
+        });
+
+        // word complete hone ke baad erase
+        setTimeout(() => {
+            erase();
+        }, (index * 3000) + (word.length * 200) + 500);
+
+    });
+
+    // jab saare words complete ho jayein to dubara type start
+    setTimeout(() => {
+        type();
+    }, words.length * 3000);
+
+}
+
+
+
+// erase function
+function erase() {
+
+    // current text store
+    let text = typedTextSpan.innerHTML;
+
+    // har 100ms me ek letter delete
+    const interval = setInterval(() => {
+
+        // last letter remove
+        text = text.slice(0, -1);
+
+        // updated text show
+        typedTextSpan.innerHTML = text;
+
+        // text khatam to stop
+        if (text.length === 0) {
+            clearInterval(interval);
+        }
+
+    }, 100);
+
+}
+
+
+
+// start typing
+type();
+```  
+
 

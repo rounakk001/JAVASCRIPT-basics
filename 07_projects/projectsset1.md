@@ -344,5 +344,261 @@ function erase() {
 // start typing
 type();
 ```  
+## Project 8 - Emoji Changer
+``` javascript
+const btn = document.querySelector('#emoji');
+const emojis = [
+  '😆',
+  '😅',
+  '🤣',
+  '😂',
+  '😀',
+  '🤑',
+  '🤨',
+  '🙂',
+  '😊',
+  '😗',
+  '😛',
+  '😏',
+  '🤥',
+  '😴',
+  '🥺',
+  '😧',
+  '😇',
+  '😳',
+  '🙃',
+  '🥴',
+  '🧐',
+  '🤨',
+  '😒',
+  '🤔',
+  '🤭',
+  '🥰',
+  '🤐',
+  '👀',
+  '🤔',
+  '🤪',
+  '🥲',
+  '😃',
+  '😁',
+  '😬',
+];
+
+
+btn.addEventListener('mouseenter',function(){
+    changeEmoji();
+})
+
+function changeEmoji(){
+
+  const randomIndex = Math.floor(Math.random() * emojis.length);
+
+  btn.textContent=emojis[randomIndex]
+
+}
+```
+ 
+## Project 9 - Text Editor
+``` javascript
+const output = document.querySelector('#output-field');
+
+const uppercase = document.querySelector('.btn.uppercase');
+const lowercase = document.querySelector('.btn.lowercase');
+const capital = document.querySelector('.btn.capitalize');
+const bold = document.querySelector('.btn.bold');
+const italic = document.querySelector('.btn.italic');
+const underline = document.querySelector('.btn.underline');
+
+// UPPERCASE
+uppercase.addEventListener('click', function () {
+  const input = document.getElementById('input-field').value;
+
+  output.style.fontWeight = "normal";
+  output.style.fontStyle = "normal";
+  output.style.textDecoration = "none";
+
+  output.innerHTML = input.toUpperCase();
+});
+
+// LOWERCASE
+lowercase.addEventListener('click', function () {
+  const input = document.getElementById('input-field').value;
+
+  output.style.fontWeight = "normal";
+  output.style.fontStyle = "normal";
+  output.style.textDecoration = "none";
+
+  output.innerHTML = input.toLowerCase();
+});
+
+// CAPITALIZE EACH WORD
+capital.addEventListener('click', function () {
+  const input = document.getElementById('input-field').value;
+
+  let res = "";
+
+  if (input.length > 0) {
+    res += input.charAt(0).toUpperCase();
+  }
+
+  for (let i = 1; i < input.length; i++) {
+    if (input.charAt(i) === ' ') {
+      res += " ";
+      if (i + 1 < input.length) {
+        res += input.charAt(i + 1).toUpperCase();
+        i++;
+      }
+    } else {
+      res += input.charAt(i);
+    }
+  }
+
+  output.style.fontWeight = "normal";
+  output.style.fontStyle = "normal";
+  output.style.textDecoration = "none";
+
+  output.innerHTML = res;
+});
+
+// BOLD
+bold.addEventListener('click', function () {
+  const input = document.getElementById('input-field').value;
+
+  output.innerHTML = input;
+  output.style.fontWeight = "bold";
+});
+
+// ITALIC
+italic.addEventListener('click', function () {
+  const input = document.getElementById('input-field').value;
+
+  output.innerHTML = input;
+  output.style.fontStyle = "italic";
+});
+
+// UNDERLINE
+underline.addEventListener('click', function () {
+  const input = document.getElementById('input-field').value;
+
+  output.innerHTML = input;
+  output.style.textDecoration = "underline";
+});
+//Optimsed Code Below
+
+/*
+const output = document.querySelector("#output-field");
+const inputField = document.getElementById("input-field");
+
+// reusable function
+function updateOutput(transform, style = {}) {
+  const input = inputField.value;
+
+  // text transform
+  output.innerHTML = transform(input);
+
+  // reset styles
+  output.style.fontWeight = "normal";
+  output.style.fontStyle = "normal";
+  output.style.textDecoration = "none";
+
+  // apply new styles
+  Object.assign(output.style, style);
+}
+
+// button selectors + functionality
+document.querySelector(".btn.uppercase").onclick = () =>
+  updateOutput(text => text.toUpperCase());
+
+document.querySelector(".btn.lowercase").onclick = () =>
+  updateOutput(text => text.toLowerCase());
+
+document.querySelector(".btn.capitalize").onclick = () =>
+  updateOutput(text =>
+    text
+      .split(" ")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ")
+  );
+
+document.querySelector(".btn.bold").onclick = () =>
+  updateOutput(text => text, { fontWeight: "bold" });
+
+document.querySelector(".btn.italic").onclick = () =>
+  updateOutput(text => text, { fontStyle: "italic" });
+
+document.querySelector(".btn.underline").onclick = () =>
+  updateOutput(text => text, { textDecoration: "underline" });
+```
+## Project 10 - Random Image Generator
+``` javascript
+// Use this working random image source:
+const baseURL = 'https://picsum.photos/';
+
+// Full example:
+const container = document.querySelector('.content');
+const rows = 7;
+
+for (let i = 0; i < rows * 3; i++) {
+  const img = document.createElement('img');
+
+  // picsum uses / instead of x
+  img.src = `${baseURL}${randomNumber()}/${randomNumber()}`;
+
+  container.appendChild(img);
+}
+
+function randomNumber() {
+  return Math.floor(Math.random() * 10) + 300;
+}
+```
+## Project 11 - Random JOKES
+``` javascript
+const btn=document.querySelector('#getJoke');
+const display=document.getElementById('display-joke')
+
+btn.addEventListener('click',function(){
+
+  fetch('https://api.chucknorris.io/jokes/random')
+  .then((response)=>{
+   return  response.json();
+  })
+  .then((data)=>{
+    display.innerText=data.value;
+  })
+  .catch((error)=>{
+    console.log('error');
+  })
+})
+
+
+
+//XMLHttpRequest()
+// btn.addEventListener('click',function(){
+
+//   const requesturl = 'https://api.chucknorris.io/jokes/random';
+//   const xhr=new XMLHttpRequest();
+
+//   xhr.open('GET',requesturl);
+
+//   xhr.onreadystatechange=function(){
+//       if(xhr.readyState===4){
+        
+//         const data=JSON.parse(xhr.responseText);
+
+//         document.getElementById('display-joke').innerText=data.value
+//       }
+//   }
+//   xhr.send();
+// })
+ 
+
+// handle this end point with XMLHttpRequest
+
+// handle this end point with promises
+
+// handle the case of race condition
+```
+
+
 
 
